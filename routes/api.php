@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\PasienController;
+use App\Http\Controllers\RekamanController;
 use App\Http\Controllers\RekamController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +43,18 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/getdaftarepasien',[RekamController::class,'getdaftarepasien']);
     
 });
+
+
+Route::get('/getpasien',[PasienController::class,'index']);
+Route::get('/getpasiendetail/{id}',[PasienController::class,'show']);
+Route::post('/tambahpasien',[PasienController::class,'tambah_pasien']);
+Route::post('/deletepasien/{id}',[PasienController::class,'delete_pasien']);
+
+Route::post('/buatrekaman',[RekamanController::class,'buatrekaman']);
+Route::post('/updaterekaman/{id}',[RekamanController::class,'updaterekaman']);
+Route::post('/hapusrekaman/{id}',[RekamanController::class,'hapusrekaman']);
+Route::get('/indexall',[PasienController::class,'indexall']);
+
 
 
 Route::post('/login',[AuthenticationController::class,'login']);
