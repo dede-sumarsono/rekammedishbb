@@ -18,8 +18,20 @@ class RekamanResource extends JsonResource
             'id' => $this->id,
             'pasien_id' => $this->pasien_id,
             'nomor' => $this->nomor,
+            'poli' => $this->poli,
+            'jenis_pelayanan' => $this->jenis_pelayanan,
             'created_at' => date_format($this->created_at,"Y-m-d H:i:s"),
-            'pasien' => $this->whenLoaded('dataPasien')
+            'pasien' => $this->whenLoaded('dataPasien', function (){
+                return collect($this->dataPasien)->each(function ($dataPasien) {
+                    //return collect($this->pasienrekam)->where("diagnosa",'!=',null)->each(function ($pasienrekam) {
+                    return $dataPasien;
+    
+                     });
+            }),
+
+
+    
+
         
         ];
     }

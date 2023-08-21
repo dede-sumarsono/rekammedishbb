@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\RekamanResource;
 use App\Models\Rekaman;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RekamanController extends Controller
 {
@@ -48,5 +50,33 @@ class RekamanController extends Controller
         $rekaman = Rekaman::findOrFail($id);
         $rekaman->delete();
         
+    }
+
+
+    public function getdaftarepasien2()
+    {
+  
+
+        $poli = Auth::user()->poli;
+        $data3 = Rekaman::whereDate("created_at",'=',Carbon::today())
+        ->where("diagnosa","=",null)
+        ->where("poli","=",$poli)
+        ->get();
+
+        //return response()->json(['data' => $data3]);
+        return RekamanResource::collection($data3->loadMissing(['dataPasien']));
+    }
+
+    public function getallpasien2()
+    {
+        $poli = Auth::user()->poli;
+        $data3 = Rekaman::whereDate("created_at",'=',Carbon::today())
+        ->where("diagnosa","=",null)
+        ->where("poli","=",$poli)
+        ->get();
+        $data3 = count($data3);
+
+        return response()->json(['data' => $data3]);
+        //return response()->json(['data' => $poli]);
     }
 }

@@ -41,19 +41,27 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/getdatarekammedis',[RekamController::class,'getdatarekammedis']);
     Route::get('/getallpasien',[RekamController::class,'getallpasien']);
     Route::get('/getdaftarepasien',[RekamController::class,'getdaftarepasien']);
+
+
+
+    ////////////revisi
+    Route::get('/getpasien',[PasienController::class,'index']);
+    Route::get('/getpasiendetail/{id}',[PasienController::class,'show']);
+    Route::post('/tambahpasien',[PasienController::class,'tambah_pasien']);
+    Route::post('/deletepasien/{id}',[PasienController::class,'delete_pasien']);
+
+    Route::post('/buatrekaman',[RekamanController::class,'buatrekaman']);
+    Route::post('/updaterekaman/{id}',[RekamanController::class,'updaterekaman']);
+    Route::post('/hapusrekaman/{id}',[RekamanController::class,'hapusrekaman']);
+    Route::get('/indexall',[PasienController::class,'indexall']);
+    Route::get('/getdaftarepasien2',[RekamanController::class,'getdaftarepasien2']);
+    Route::get('/lihatdatarekampasien/{id}',[PasienController::class,'lihatdatarekampasien']);
+    Route::get('/getallpasien2',[RekamanController::class,'getallpasien2']);
     
 });
 
 
-Route::get('/getpasien',[PasienController::class,'index']);
-Route::get('/getpasiendetail/{id}',[PasienController::class,'show']);
-Route::post('/tambahpasien',[PasienController::class,'tambah_pasien']);
-Route::post('/deletepasien/{id}',[PasienController::class,'delete_pasien']);
 
-Route::post('/buatrekaman',[RekamanController::class,'buatrekaman']);
-Route::post('/updaterekaman/{id}',[RekamanController::class,'updaterekaman']);
-Route::post('/hapusrekaman/{id}',[RekamanController::class,'hapusrekaman']);
-Route::get('/indexall',[PasienController::class,'indexall']);
 
 
 

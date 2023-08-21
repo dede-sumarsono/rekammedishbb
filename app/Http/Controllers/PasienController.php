@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\PasienDetailResource;
 use App\Http\Resources\PasienResource;
 use App\Models\Pasien;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PasienController extends Controller
@@ -52,6 +53,21 @@ class PasienController extends Controller
         return PasienDetailResource::collection($pasien->loadMissing(['pasienrekam'])); 
         
     }
+
+
+    function lihatdatarekampasien($id) {
+        $pasien = Pasien::findOrFail($id);
+        //return PasienDetailResource::collection($pasien->loadMissing(['pasienrekam'])); 
+        // $data3 = Rekam::whereDate("created_at",'=',Carbon::today())
+        // ->where("diagnosa","=",null)
+        return new PasienDetailResource($pasien->loadMissing(['pasienrekam'])); 
+        
+    }
+
+
+    
+
+
 
 
 

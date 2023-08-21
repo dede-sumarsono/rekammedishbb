@@ -24,7 +24,14 @@ class PasienDetailResource extends JsonResource
             'agama' => $this->agama,
             'pekerjaan' => $this->pekerjaan,
             'created_at' => date_format($this->created_at,"Y-m-d H:i:s"),
-            'pasienrekam' => $this->whenLoaded('pasienrekam')
+            'pasienrekam' => $this->whenLoaded('pasienrekam', function () {
+                return collect($this->pasienrekam)->each(function ($pasienrekam) {
+                //return collect($this->pasienrekam)->where("diagnosa",'!=',null)->each(function ($pasienrekam) {
+                return $pasienrekam;
+
+                 });
+
+            })
         ];
     }
 }
